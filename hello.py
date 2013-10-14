@@ -18,8 +18,8 @@ def index():
 def raph():
   return 'café ?'
 
-@app.route('/velo')
-def velo():
+@app.route('/ipgp')
+def ipgp():
   # clé pour API JCDecaux 
   api_key='d6177aa449272d6c0bdde000927553cf45ac7c50'
 
@@ -51,7 +51,7 @@ def velo():
   s += 'random numpy generated number '+str(np.random.rand())
   return render_template_string(s)
 
-@app.route('/folium')
+@app.route('/paris')
 def paris():
   url = 'https://api.jcdecaux.com/vls/v1/stations?contract=Paris&apiKey=d6177aa449272d6c0bdde000927553cf45ac7c50'
   response = urllib2.urlopen(url).read()
