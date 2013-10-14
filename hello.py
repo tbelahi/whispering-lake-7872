@@ -10,8 +10,9 @@ import folium
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-  return 'hello world!'
+@app.route('/#')
+def index():
+  return render_template('index.html')
 
 @app.route('/Raph')
 def raph():
