@@ -4,6 +4,7 @@ import os
 from flask import Flask, render_template_string
 import json
 import urllib2
+import numpy as np
 
 app = Flask(__name__)
 
@@ -45,4 +46,5 @@ def velo():
 
   #return 'en construction'
   #s += '{% endblock %}'
+  s += 'random numpy generated number '+str(np.random.rand())
   return render_template_string(s)
