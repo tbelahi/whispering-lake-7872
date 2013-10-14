@@ -25,8 +25,7 @@ def ipgp():
 
   # stations around IPGP:
   stations_ipgp = ['05031 - LACEPEDE','05021 - JUSSIEU','05023 - PLACE JUSSIEU']
-  #s = '{%extends "layout.html"%}\n{%block body%}'
-  s = ''
+  s = '{%extends "layout.html"%}\n{%block body%}'
   # fetching and plotting info on map
   for station in stations_ipgp:
     # requesting real-time info on the station from Vélib API
@@ -47,8 +46,8 @@ def ipgp():
         status, available_bikes, available_bike_stands)
 
   #return 'en construction'
-  #s += '{% endblock %}'
-  s += 'random numpy generated number '+str(np.random.rand())
+  s += '{% endblock %}'
+  #s += 'random numpy generated number '+str(np.random.rand())
   return render_template_string(s)
 
 @app.route('/paris')
@@ -57,7 +56,7 @@ def paris():
   response = urllib2.urlopen(url).read()
   stations = json.loads(response)
   
-  map_paris = folium.Map([48.85329,2.34902])
+  map_paris = folium.Map([48.85329,2.34902], zoom_start=12)
   # fetching and plotting info on map
   for station in stations:
     #create the marker corresponding to the station and it's status
@@ -80,5 +79,8 @@ def paris():
 
   map_paris.create_map('paris.html')
   with open('paris.html') as f:
-    s = f.read()
+    s = '{%extends "layout.html"%}\n{%block body%}\n'+f.read()+'\n{% endblock %}'
+  with open('templates/paris.html', 'w') as g:
+    g.write(s)
+  #return render_template('paris.html')
   return render_template_string(s)
