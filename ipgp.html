@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+   <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+   
+   
+   
+   
+
+
+<style>
+
+#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+}
+
+</style>
+</head>
+<body>
+
+        <div id="map" style="width: 960px; height: 500px"></div>
+
+<script>
+
+
+
+var map = L.map('map').setView([48.84555, 2.35506], 16);
+
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data (c) <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+
+var circle_1 = L.circle([48.8436748454, 2.35461598268], 50, {
+                            color: 'orange',
+                            fillColor: 'orange',
+                            fillOpacity: 0.6
+                            });
+circle_1.bindPopup("05031 - LACEPEDE status: OPEN, available bikes: 5, free parking spots: 50");
+map.addLayer(circle_1)
+
+var circle_2 = L.circle([48.8471846412, 2.35339837969], 50, {
+                            color: 'orange',
+                            fillColor: 'orange',
+                            fillOpacity: 0.6
+                            });
+circle_2.bindPopup("05021 - JUSSIEU status: OPEN, available bikes: 4, free parking spots: 25");
+map.addLayer(circle_2)
+
+var circle_3 = L.circle([48.8456168785, 2.3557455], 50, {
+                            color: 'orange',
+                            fillColor: 'orange',
+                            fillOpacity: 0.6
+                            });
+circle_3.bindPopup("05023 - PLACE JUSSIEU status: OPEN, available bikes: 2, free parking spots: 22");
+map.addLayer(circle_3)
+
+
+
+
+
+
+</script>
+
+</body>

@@ -24,10 +24,11 @@ def ipgp():
   # clé pour API JCDecaux
   api_key='d6177aa449272d6c0bdde000927553cf45ac7c50'
 
+  carte_ipgp = folium.Map([48.84555,2.35506], zoom_start=16)
   # stations around IPGP:
   stations_ipgp = ['05031 - LACEPEDE','05021 - JUSSIEU','05023 - PLACE JUSSIEU']
-  s = '{%extends "layout.html"%}\n{%block body%}'
   # fetching and plotting info on map
+  s = ''
   for station in stations_ipgp:
     # requesting real-time info on the station from Vélib API
     url = 'https://api.jcdecaux.com/vls/v1/stations/{0}?contract=Paris&apiKey={1}'\
@@ -43,13 +44,22 @@ def ipgp():
     available_bike_stands = station_real_time['available_bike_stands']
     lon = station_real_time['position']['lng']
     lat = station_real_time['position']['lat']
-    s += '<p>{0} status: {1}, available bikes: {2}, free parking spots: {3}</p>\n'.format(name,\
+    s = '{0} status: {1}, available bikes: {2}, free parking spots: {3}'.format(name,\
         status, available_bikes, available_bike_stands)
+    s = s.encode('ascii', 'replace')
+    if available_bikes==0:
+      col = 'red'
+    elif float(available_bikes)/(available_bike_stands+available_bikes) <=0.15:
+      col= 'orange'
+    else:
+      col = 'green'
+    carte_ipgp.circle_marker([lat, lon], popup=s, radius=50,line_color=col,fill_color=col)
 
-  #return 'en construction'
-  s += '{% endblock %}'
-  #s += 'random numpy generated number '+str(np.random.rand())
-  return render_template_string(s)
+  carte_ipgp.create_map('ipgp.html')
+  with open('ipgp.html') as f:
+    s = f.read()
+  ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
+  return render_template_string(ss)
 
 @app.route('/paris')
 def paris():
