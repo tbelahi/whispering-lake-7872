@@ -2,18 +2,21 @@
 
 import os
 import re
-from flask import Flask, render_template_string, render_template, url_for, redirect
+from flask import Flask, render_template_string, render_template, url_for, redirect, request
 import json
 import urllib2
 import numpy as np
 import folium
-import psycopg2
-import urlparse
+#import psycopg2
+#import urlparse
 from flask.ext.sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+try:
+  app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+except:
+  app.config['SQLAlchemny_DATABASE_URI'] = "postgresql://thomasbelahi@localhost/mylocaldb"
 db = SQLAlchemy(app)
 
 
@@ -48,9 +51,13 @@ def coffeemachine():
 
 @app.route('/new_debt', methods=['GET', 'POST'])
 def new():
+  print '0'
   if request.method == 'POST':
-    creance = Debt(request.form['creancier'], request.form['debiteur'],request.form['drink'], str(float(request.form['debt_value'].replace(',','.'))))
+    print '1'
+    creance = Debt(request.form['creancier'], request.form['debiteur'], request.form['drink'], request.form['debt_value'])
+    print '2'
     db.session.add(creance)
+    print '3'
     db.session.commit()
     return redirect(url_for('coffeemachine'))
   return render_template('new_debt.html')
