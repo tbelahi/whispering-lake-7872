@@ -52,6 +52,7 @@ def coffeemachine():
 def new():
   print '0'
   if request.method == 'POST':
+    print db
     print '1'
     print request.form['creancier'], request.form['debiteur'], request.form['drink'], request.form['debt_value']
     print '1.5'
