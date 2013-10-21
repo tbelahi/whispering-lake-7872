@@ -15,6 +15,7 @@ from datetime import datetime
 app = Flask(__name__)
 try:
   app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+  app.config['DEBUG'] = True
 except:
   app.config['SQLAlchemny_DATABASE_URI'] = "postgresql://thomasbelahi@localhost/mylocaldb"
 db = SQLAlchemy(app)
@@ -26,6 +27,7 @@ def index():
   return render_template('index.html')
 
 class Debt(db.Model):
+  __tablename__ = 'creances'
   id = db.Column('debt_id', db.Integer, primary_key=True)
   pub_date = db.Column(db.DateTime)
   creancier = db.Column(db.String) # TODO: connect to User dataB when created
@@ -35,11 +37,11 @@ class Debt(db.Model):
   paid = db.Column(db.Boolean)
 
   def __init__(self, creancier, debiteur, drink, debt_value):
+    self.pub_date = datetime.utcnow()
     self.creancier = creancier
     self.debiteur = debiteur
-    self.debt_value = debt_value
     self.drink = drink
-    self.pub_date = datetime.utcnow()
+    self.debt_value = debt_value
     self.paid = False
 
 
