@@ -52,20 +52,13 @@ def coffeemachine():
 
 @app.route('/new_debt', methods=['GET', 'POST'])
 def new():
-  print '0'
   if request.method == 'POST':
     print db
-    print '1'
     print request.form['creancier'], request.form['debiteur'], request.form['drink'], request.form['debt_value']
-    print '1.5'
     a = float(request.form['debt_value'])
-    print '1.75'
     creance = Debt(request.form['creancier'], request.form['debiteur'], request.form['drink'], float(request.form['debt_value']))
-    print '2'
     db.session.add(creance)
-    print '3'
     db.session.commit()
-    print '4'
     return redirect(url_for('coffeemachine'))
   return render_template('new_debt.html')
 
