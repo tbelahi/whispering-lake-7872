@@ -5,7 +5,7 @@
     <!-- creancier -->
     <div class="control-group">
         <div class="controls">
-          <input type="text" id="title" name="title" class="input-xlarge"
+          <input type="text" id="title" name="creancier" class="input-xlarge"
             placeholder="Qui possède la dette ?" value="{{ request.form.creancier }}"
             required>
         </div>
@@ -14,24 +14,27 @@
     <!-- debiteur -->
     <div class="control-group">
         <div class="controls">
-          <textarea name="text" rows=1 class="input-xlarge" placeholder="Qui
-            doit de l'argent ?" required>{{ request.form.debiteur }}</textarea>
+          <input type="text" id="title" name="debiteur" class="input-xlarge"
+            placeholder="Qui doit de l'argent ?" value="{{ request.form.debiteur }}"
+            required>
         </div>
     </div>
 
     <!-- drink -->
     <div class="control-group">
         <div class="controls">
-          <textarea name="text" rows=1 class="input-xlarge" placeholder="Quelle était la boisson consommée ? "
-            required>{{ request.form.drink }}</textarea>
+          <input type="text" id="title" name="drink" class="input-xlarge"
+            placeholder="Quel était la boisson ?" value="{{ request.form.drink }}"
+            required>
         </div>
     </div>
 
     <!-- montant de la creance -->
     <div class="control-group">
         <div class="controls">
-          <textarea name="text" rows=1 class="input-xlarge" placeholder="Quel
-            est le montant de la créance ? (ex: 0.40 €)"  required>{{ request.form.debt_value }}</textarea>
+          <input type="text" id="title" name="debt_value" class="input-xlarge"
+            placeholder="Quel était le prix ?" value="{{
+            request.form.debt_value }}"
         </div>
     </div>
 
