@@ -10,6 +10,7 @@ import folium
 import psycopg2
 import urlparse
 from flask.ext.sqlalchemy import SQLAlchemy
+import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
@@ -21,9 +22,39 @@ db = SQLAlchemy(app)
 def index():
   return render_template('index.html')
 
-@app.route('/Raph')
-def raph():
-  return 'café ?'
+class Debt(db.Model):
+  __tablename__='creances'
+  id = db.Column('debt_id', db.Integer, primary_key=True)
+  pub_date = db.Colun(db.DateTime)
+  creancier = db.Column(db.String) # TODO: connect to User dataB when created
+  debiteur = db.Column(db.String) # TODO: connect to User dataB when created
+  drink = db.Column(db.String)
+  debt_value = db.Column(db.Float)
+  paid = db.Column(bs.Boolean)
+
+  def __init__(self, creancier, debiteur, drink, debt_value):
+    self.creancier = creancier
+    self.debiteur = debiteur
+    self.debt_value = debt_value
+    self.drink = drink
+    self.pub_date = datetime.utc_now()
+    self.paid = False
+
+
+@app.route('/coffeemachine')
+def coffeemachine():
+  # TODO: display database and add new entry button, require login
+  return render_template_string('en construction')
+
+@app.route('/new_debt', methods=['GET', 'POST'])
+def new():
+  if request.method == 'POST':
+    creance = Debt(request.form['creancier'], request.form['debiteur'],
+        str(float(request.form['debt_value'].replace(',','.'))))
+    db.session.add(creance)
+    db.session.commit()
+    return redirect(url_for('coffeemachine')
+  return render_template('new_debt.html')
 
 @app.route('/ipgp')
 def ipgp():
