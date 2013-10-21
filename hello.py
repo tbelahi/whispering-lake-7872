@@ -26,7 +26,6 @@ def index():
   return render_template('index.html')
 
 class Debt(db.Model):
-  __tablename__='creances'
   id = db.Column('debt_id', db.Integer, primary_key=True)
   pub_date = db.Column(db.DateTime)
   creancier = db.Column(db.String) # TODO: connect to User dataB when created
