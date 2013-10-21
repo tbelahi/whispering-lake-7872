@@ -30,7 +30,7 @@ class Debt(db.Model):
   debiteur = db.Column(db.String) # TODO: connect to User dataB when created
   drink = db.Column(db.String)
   debt_value = db.Column(db.Float)
-  paid = db.Column(bs.Boolean)
+  paid = db.Column(db.Boolean)
 
   def __init__(self, creancier, debiteur, drink, debt_value):
     self.creancier = creancier
