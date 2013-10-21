@@ -9,7 +9,7 @@ import numpy as np
 import folium
 import psycopg2
 import urlparse
-from flask_sqlachemy import SQLAlchemy
+from flask.ext.sqlachemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
