@@ -53,7 +53,7 @@ def new():
         str(float(request.form['debt_value'].replace(',','.'))))
     db.session.add(creance)
     db.session.commit()
-    return redirect(url_for('coffeemachine')
+    return redirect(url_for('coffeemachine'))
   return render_template('new_debt.html')
 
 @app.route('/ipgp')
