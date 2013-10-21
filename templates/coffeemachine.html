@@ -16,7 +16,8 @@
         <td>{{ creance.pub_date.strftime('%Y-%m-%d %H:%M') }}
         <td>{{ creance.creancier }}</td>
         <td>{{ creance.debiteur }}</td>
-        <td style={{ "text-decoration:line-through" if creance.paid }}>{{creance.montant }}
+        <td>{{ creance.boisson }}</td>
+        <td style={{ "text-decoration:line-through" if creance.paid }}>{{ creance.montant }}</td>
       {%- endfor %}
     </table>
     <p>
