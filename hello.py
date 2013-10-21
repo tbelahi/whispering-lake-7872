@@ -15,7 +15,7 @@ from datetime import datetime
 app = Flask(__name__)
 try:
   app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-  app.config['DEBUG'] = True
+#  app.config['DEBUG'] = True
 except:
   app.config['SQLAlchemny_DATABASE_URI'] = "postgresql://thomasbelahi@localhost/mylocaldb"
 db = SQLAlchemy(app)
