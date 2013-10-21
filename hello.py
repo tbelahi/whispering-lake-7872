@@ -54,7 +54,9 @@ def new():
   print '0'
   if request.method == 'POST':
     print '1'
-    creance = Debt(request.form['creancier'], request.form['debiteur'], request.form['drink'], request.form['debt_value'])
+    print request.form['creancier'], request.form['debiteur'], request.form['drink'], request.form['debt_value']
+    print '1.5'
+    creance = Debt(request.form['creancier'], request.form['debiteur'], request.form['drink'], float(request.form['debt_value']))
     print '2'
     db.session.add(creance)
     print '3'
