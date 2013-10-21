@@ -48,7 +48,7 @@ class Debt(db.Model):
 @app.route('/coffeemachine')
 def coffeemachine():
   # TODO: display database and add new entry button, require login
-  return render_template_string('en construction')
+  return render_template('coffeemachine.html', creances=Debt.query.order_by(Debt.pub_date.desc()).all())
 
 @app.route('/new_debt', methods=['GET', 'POST'])
 def new():
