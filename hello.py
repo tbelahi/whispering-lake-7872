@@ -121,7 +121,7 @@ def getStationsIPGP_prendre():
            <div class="controls">
            <ul>
            <li><button type="submit" name='submit' value='prendre' href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</button></li>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           <li><button type="submit" name='submit' value='poser' href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</button></li>
            </ul>
            </div>
            </div>
@@ -174,8 +174,8 @@ def getStationsIPGP_poser():
            <div class="nav">
            <div class="container">
            <ul>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           <li><button type="submit" name='submit' value='prendre' href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</button></li>
+           <li><button type="submit" name='submit' value='poser' href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</button></li>
            </ul>
            </div>
            </div>
