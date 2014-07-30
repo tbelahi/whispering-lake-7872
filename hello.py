@@ -62,8 +62,19 @@ def new():
     return redirect(url_for('coffeemachine'))
   return render_template('new_debt.html')
 
-@app.route('/ipgp')
+
+@app.route('/ipgp', methods=['GET','POST'])
 def ipgp():
+  if request.method == 'POST':
+    if request.form['submit'] == 'prendre':
+      ss = getStationsIPGP_prendre()
+    elif request.form['submit'] == 'poser':
+      ss = getStationsIPGP_poser()
+  elif request.method == 'GET':
+    ss = getStationsIPGP_prendre()
+  return render_template_string(ss)
+
+def getStationsIPGP_prendre():
   # clé pour API JCDecaux
   api_key='d6177aa449272d6c0bdde000927553cf45ac7c50'
 
@@ -99,10 +110,51 @@ def ipgp():
     carte_ipgp.circle_marker([lat, lon], popup=s, radius=50,line_color=col,fill_color=col)
 
   carte_ipgp.create_map('ipgp.html')
-  with open('ipgp.html') as f:
+  wit open('ipgp.html') as f:
     s = f.read()
   ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
-  return render_template_string(ss)
+  return ss
+
+def getStationsIPGP_poser():
+  # clé pour API JCDecaux
+  api_key='d6177aa449272d6c0bdde000927553cf45ac7c50'
+
+  carte_ipgp = folium.Map([48.84555,2.35506], zoom_start=16)
+  # stations around IPGP:
+  stations_ipgp = ['05031 - LACEPEDE','05021 - JUSSIEU','05023 - PLACE JUSSIEU']
+  # fetching and plotting info on map
+  s = ''
+  for station in stations_ipgp:
+    # requesting real-time info on the station from Vélib API
+    url = 'https://api.jcdecaux.com/vls/v1/stations/{0}?contract=Paris&apiKey={1}'\
+          .format(str(station[:5]), api_key)
+    response = urllib2.urlopen(url).read()
+    # put them in a dictionnary
+    station_real_time = json.loads(response)
+
+    #create the marker corresponding to the station and it's status
+    status = station_real_time['status']
+    name = station_real_time['name'].encode('ascii','replace')
+    available_bikes = station_real_time['available_bikes']
+    available_bike_stands = station_real_time['available_bike_stands']
+    lon = station_real_time['position']['lng']
+    lat = station_real_time['position']['lat']
+    s = '{0} status: {1}, available bikes: {2}, free parking spots: {3}'.format(name,\
+        status, available_bikes, available_bike_stands)
+    s = s.encode('ascii', 'replace')
+    if available_bikes==available_bike_stands:
+      col = 'red'
+    elif float(available_bike_stands)/(available_bike_stands+available_bikes) <=0.15:
+      col= 'orange'
+    else:
+      col = 'green'
+    carte_ipgp.circle_marker([lat, lon], popup=s, radius=50,line_color=col,fill_color=col)
+
+  carte_ipgp.create_map('ipgp.html')
+  wit open('ipgp.html') as f:
+    s = f.read()
+  ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
+  return ss
 
 @app.route('/paris')
 def paris():
