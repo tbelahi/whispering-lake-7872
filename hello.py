@@ -63,19 +63,18 @@ def new():
   return render_template('new_debt.html')
 
 
-# @app.route('/ipgp')
-# def ipgp():
-#   #if request.method == 'POST':
-#   #  if request.form['submit'] == 'prendre':
-#   #    ss = getStationsIPGP_prendre()
-#   #  elif request.form['submit'] == 'poser':
-#   #    ss = getStationsIPGP_poser()
-#   #elif request.method == 'GET':
-#   #  ss = getStationsIPGP_prendre()
-#   ss = getStationsIPGP_prendre()
-#   return render_template_string(ss)
-
 @app.route('/ipgp')
+def ipgp():
+  #if request.method == 'POST':
+  #  if request.form['submit'] == 'prendre':
+  #    ss = getStationsIPGP_prendre()
+  #  elif request.form['submit'] == 'poser':
+  #    ss = getStationsIPGP_poser()
+  #elif request.method == 'GET':
+  #  ss = getStationsIPGP_prendre()
+  ss = getStationsIPGP_prendre()
+  return render_template_string(ss)
+
 def getStationsIPGP_prendre():
   # clé pour API JCDecaux
   api_key='d6177aa449272d6c0bdde000927553cf45ac7c50'
@@ -112,10 +111,10 @@ def getStationsIPGP_prendre():
     carte_ipgp.circle_marker([lat, lon], popup=s, radius=50,line_color=col,fill_color=col)
 
   carte_ipgp.create_map('ipgp.html')
-  wit open('ipgp.html') as f:
+  with open('ipgp.html') as f:
     s = f.read()
   ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
-  return render_template_string(ss)
+  return ss
 
 # def getStationsIPGP_poser():
 #   # clé pour API JCDecaux
@@ -153,7 +152,7 @@ def getStationsIPGP_prendre():
 #     carte_ipgp.circle_marker([lat, lon], popup=s, radius=50,line_color=col,fill_color=col)
 
 #   carte_ipgp.create_map('ipgp.html')
-#   wit open('ipgp.html') as f:
+#   with open('ipgp.html') as f:
 #     s = f.read()
 #   ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
 #   return ss
