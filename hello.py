@@ -112,7 +112,8 @@ def getStationsIPGP_prendre():
   carte_ipgp.create_map('ipgp.html')
   with open('ipgp.html') as f:
     s = f.read()
-  ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
+  buttons = """<input type="submit" name="submit" value="Do Something">\n<input type="submit" name="submit" value="Do Something Else">\n"""
+  ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n+buttons+{% endblock %}'
   return ss
 
 def getStationsIPGP_poser():
@@ -153,7 +154,8 @@ def getStationsIPGP_poser():
   carte_ipgp.create_map('ipgp.html')
   with open('ipgp.html') as f:
     s = f.read()
-  ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
+  buttons = """<input type="submit" name="submit" value="Do Something">\n<input type="submit" name="submit" value="Do Something Else">\n"""
+  ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n+buttons+{% endblock %}'
   return ss
 
 @app.route('/paris')
