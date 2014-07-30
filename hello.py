@@ -113,8 +113,8 @@ def getStationsIPGP_prendre():
   with open('ipgp.html') as f:
     s = f.read()
   buttons = """
-           </div class="nav">
-           </div class="container">
+           <div class="nav">
+           <div class="container">
            <ul>
            <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
            <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
@@ -167,8 +167,8 @@ def getStationsIPGP_poser():
   with open('ipgp.html') as f:
     s = f.read()
   buttons = """
-           </div class="nav">
-           </div class="container">
+           <div class="nav">
+           <div class="container">
            <ul>
            <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
            <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
