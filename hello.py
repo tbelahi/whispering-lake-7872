@@ -65,6 +65,7 @@ def new():
 
 @app.route('/ipgp', methods=['GET', 'POST'])
 def ipgp():
+  print request.method
   if request.method == 'POST':
    if request.form['submit'] == 'prendre':
      ss = getStationsIPGP_prendre()
