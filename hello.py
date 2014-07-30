@@ -114,16 +114,10 @@ def getStationsIPGP_prendre():
     s = f.read()
   #buttons = """<button method="post" type="submit" name="submit" value="prendre">\n<button type="submit" name="submit" value="poser">\n"""
   buttons = """
-      <div class="control-group" method=post>
-        <div class="controls">
-          <button type="submit" class="btn btn-primary" name="prendre">Prendre</button>
-        </div>
-         <div class="controls">
-          <button type="submit" class="btn btn-primary" name="poser">poser</button>
-        </div>
-    </div>
-    </body>
-    """
+           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a>
+           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a>
+           </body>
+           """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
         re.search('<!DOCTYPE html>.*</head>(.*)</body>',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
          + buttons +'{% endblock %}'
@@ -169,16 +163,10 @@ def getStationsIPGP_poser():
     s = f.read()
   #buttons = """<button method="post" type="submit" name="submit" value="prendre">\n<button type="submit" name="submit" value="poser">\n"""
   buttons = """
-      <div class="control-group" method=post>
-        <div class="controls">
-          <button type="submit" class="btn btn-primary" name="prendre">Prendre</button>
-        </div>
-         <div class="controls">
-          <button type="submit" class="btn btn-primary" name="poser">poser</button>
-        </div>
-    </div>
-    </body>
-    """
+           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary" type="submit" name="submit" value="prendre">Prendre</a>
+           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary" type="submit" name="submit" value="poser">Poser</a>
+           </body>
+           """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
         re.search('<!DOCTYPE html>.*</head>(.*)</body>',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
          + buttons +'{% endblock %}'
