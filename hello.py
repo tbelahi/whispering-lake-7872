@@ -116,15 +116,16 @@ def getStationsIPGP_prendre():
   buttons = """
       <div class="control-group" method=post>
         <div class="controls">
-          <button type="submit" class="btn btn-success" name="prendre">Prendre</button>
+          <button type="submit" class="btn btn-primary" name="prendre">Prendre</button>
         </div>
          <div class="controls">
-          <button type="submit" class="btn btn-success" name="poser">poser</button>
+          <button type="submit" class="btn btn-primary" name="poser">poser</button>
         </div>
     </div>
+    </body>
     """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
-        re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
+        re.search('<!DOCTYPE html>.*</head>(.*)</body>',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
          + buttons +'{% endblock %}'
   return ss
 
@@ -170,15 +171,16 @@ def getStationsIPGP_poser():
   buttons = """
       <div class="control-group" method=post>
         <div class="controls">
-          <button type="submit" class="btn btn-success" name="prendre">Prendre</button>
+          <button type="submit" class="btn btn-primary" name="prendre">Prendre</button>
         </div>
          <div class="controls">
-          <button type="submit" class="btn btn-success" name="poser">poser</button>
+          <button type="submit" class="btn btn-primary" name="poser">poser</button>
         </div>
     </div>
+    </body>
     """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
-        re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
+        re.search('<!DOCTYPE html>.*</head>(.*)</body>',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
          + buttons +'{% endblock %}'
   return ss
 
