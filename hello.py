@@ -63,7 +63,7 @@ def new():
   return render_template('new_debt.html')
 
 
-@app.route('/ipgp', methods=['GET','POST'])
+@app.route('/ipgp')
 def ipgp():
   #if request.method == 'POST':
   #  if request.form['submit'] == 'prendre':
