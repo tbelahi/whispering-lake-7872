@@ -75,7 +75,7 @@ def new():
 #   ss = getStationsIPGP_prendre()
 #   return render_template_string(ss)
 
-@app.route("/ipgp")
+@app.route('/ipgp')
 def getStationsIPGP_prendre():
   # clé pour API JCDecaux
   api_key='d6177aa449272d6c0bdde000927553cf45ac7c50'
