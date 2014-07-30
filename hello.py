@@ -65,13 +65,13 @@ def new():
 
 @app.route('/ipgp', methods=['GET','POST'])
 def ipgp():
-  if request.method == 'POST':
-    if request.form['submit'] == 'prendre':
-      ss = getStationsIPGP_prendre()
-    elif request.form['submit'] == 'poser':
-      ss = getStationsIPGP_poser()
-  elif request.method == 'GET':
-    ss = getStationsIPGP_prendre()
+  #if request.method == 'POST':
+  #  if request.form['submit'] == 'prendre':
+  #    ss = getStationsIPGP_prendre()
+  #  elif request.form['submit'] == 'poser':
+  #    ss = getStationsIPGP_poser()
+  #elif request.method == 'GET':
+  #  ss = getStationsIPGP_prendre()
   return render_template_string(ss)
 
 def getStationsIPGP_prendre():
