@@ -125,6 +125,7 @@ def getStationsIPGP_prendre():
            </ul>
            </div>
            </div>
+           </form>
            </body>
            """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
@@ -171,14 +172,16 @@ def getStationsIPGP_poser():
   with open('ipgp.html') as f:
     s = f.read()
   buttons = """
-           <div class="nav">
-           <div class="container">
+           <form action="" method=post class="form-horizontal">
+           <div class="control-group">
+           <div class="controls">
            <ul>
            <li><button type="submit" name='submit' value='prendre' href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</button></li>
            <li><button type="submit" name='submit' value='poser' href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</button></li>
            </ul>
            </div>
            </div>
+           </form>
            </body>
            """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
