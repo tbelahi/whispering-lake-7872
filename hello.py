@@ -63,7 +63,7 @@ def new():
   return render_template('new_debt.html')
 
 
-@app.route('/ipgp', methods=['GET','POST'])
+@app.route('/ipgp', methods=['GET', 'POST'])
 def ipgp():
   if request.method == 'POST':
    if request.form['submit'] == 'prendre':
@@ -112,7 +112,17 @@ def getStationsIPGP_prendre():
   carte_ipgp.create_map('ipgp.html')
   with open('ipgp.html') as f:
     s = f.read()
-  buttons = """<input type="submit" name="submit" value="prendre">\n<input type="submit" name="submit" value="poser">\n"""
+  #buttons = """<button method="post" type="submit" name="submit" value="prendre">\n<button type="submit" name="submit" value="poser">\n"""
+  buttons = """
+      <div class="control-group" method=post>
+        <div class="controls">
+          <button type="submit" class="btn btn-success" name="prendre">Prendre</button>
+        </div>
+         <div class="controls">
+          <button type="submit" class="btn btn-success" name="poser">poser</button>
+        </div>
+    </div>
+    """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
         re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
          + buttons +'{% endblock %}'
@@ -156,7 +166,17 @@ def getStationsIPGP_poser():
   carte_ipgp.create_map('ipgp.html')
   with open('ipgp.html') as f:
     s = f.read()
-  buttons = """<input type="submit" name="submit" value="prendre">\n<input type="submit" name="submit" value="poser">\n"""
+  #buttons = """<button method="post" type="submit" name="submit" value="prendre">\n<button type="submit" name="submit" value="poser">\n"""
+  buttons = """
+      <div class="control-group" method=post>
+        <div class="controls">
+          <button type="submit" class="btn btn-success" name="prendre">Prendre</button>
+        </div>
+         <div class="controls">
+          <button type="submit" class="btn btn-success" name="poser">poser</button>
+        </div>
+    </div>
+    """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
         re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
          + buttons +'{% endblock %}'
