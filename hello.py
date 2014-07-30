@@ -112,10 +112,13 @@ def getStationsIPGP_prendre():
   carte_ipgp.create_map('ipgp.html')
   with open('ipgp.html') as f:
     s = f.read()
-  #buttons = """<button method="post" type="submit" name="submit" value="prendre">\n<button type="submit" name="submit" value="poser">\n"""
   buttons = """
-           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a>
-           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a>
+           </div class="buttons-map">
+           <u>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           </u>
+           </div>
            </body>
            """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
@@ -161,10 +164,13 @@ def getStationsIPGP_poser():
   carte_ipgp.create_map('ipgp.html')
   with open('ipgp.html') as f:
     s = f.read()
-  #buttons = """<button method="post" type="submit" name="submit" value="prendre">\n<button type="submit" name="submit" value="poser">\n"""
   buttons = """
-           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary" type="submit" name="submit" value="prendre">Prendre</a>
-           <a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary" type="submit" name="submit" value="poser">Poser</a>
+           </div class="buttons-map">
+           <u>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           </u>
+           </div>
            </body>
            """
   ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
