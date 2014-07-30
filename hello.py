@@ -166,10 +166,10 @@ def getStationsIPGP_poser():
     s = f.read()
   buttons = """
            </div class="buttons-map">
-           <u>
+           <ul>
            <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
            <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
-           </u>
+           </ul>
            </div>
            </body>
            """
