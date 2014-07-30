@@ -67,6 +67,7 @@ def new():
 def ipgp():
   print request.method
   print request.form
+  print request
   if request.method == 'POST':
    if request.form['submit'] == 'prendre':
      ss = getStationsIPGP_prendre()
