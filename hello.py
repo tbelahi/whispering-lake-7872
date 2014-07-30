@@ -228,8 +228,8 @@ def parisPrendre():
            <div class="nav">
            <div class="container">
            <ul>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           <li><a href="{{ url_for('paris') }}" class="btn btn-large btn-primary">Prendre</a></li>
+           <li><a href="{{ url_for('paris') }}" class="btn btn-large btn-primary">Poser</a></li>
            </ul>
            </div>
            </div>
@@ -273,8 +273,8 @@ def parisPoser():
            <div class="nav">
            <div class="container">
            <ul>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           <li><a href="{{ url_for('paris') }}" class="btn btn-large btn-primary">Prendre</a></li>
+           <li><a href="{{ url_for('paris') }}" class="btn btn-large btn-primary">Poser</a></li>
            </ul>
            </div>
            </div>
