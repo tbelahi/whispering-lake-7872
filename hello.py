@@ -66,6 +66,7 @@ def new():
 @app.route('/ipgp', methods=['GET', 'POST'])
 def ipgp():
   print request.method
+  print request.form
   if request.method == 'POST':
    if request.form['submit'] == 'prendre':
      ss = getStationsIPGP_prendre()
@@ -117,7 +118,7 @@ def getStationsIPGP_prendre():
            <div class="nav">
            <div class="container">
            <ul>
-           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
+           <li><a method=POST name='submit' value='prendre' href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
            <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
            </ul>
            </div>
