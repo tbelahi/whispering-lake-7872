@@ -183,8 +183,19 @@ def getStationsIPGP_poser():
   return ss
 
 
-@app.route('/paris')
+@app.route('/paris', methods=['GET', 'POST'])
 def paris():
+  if request.method == 'POST':
+   if request.form['submit'] == 'prendre':
+     ss = parisPrendre()
+   elif request.form['submit'] == 'poser':
+     ss = parisPoser()
+  elif request.method == 'GET':
+   ss = parisPrendre()
+  return render_template_string(ss)
+
+
+def parisPrendre():
   url = 'https://api.jcdecaux.com/vls/v1/stations?contract=Paris&apiKey=d6177aa449272d6c0bdde000927553cf45ac7c50'
   response = urllib2.urlopen(url).read()
   stations = json.loads(response)
@@ -213,6 +224,63 @@ def paris():
   map_paris.create_map('paris.html')
   with open('paris.html') as f:
     s = f.read()
-  ss = '{%extends "layout.html"%}\n{%block body%}\n'+re.search('<!DOCTYPE html>.*</head>(.*)',s,re.DOTALL|re.MULTILINE).group(1)+'\n{% endblock %}'
-  #return render_template('paris.html')
-  return render_template_string(ss)
+  buttons = """
+           <div class="nav">
+           <div class="container">
+           <ul>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           </ul>
+           </div>
+           </div>
+           </body>
+           """
+  ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
+        re.search('<!DOCTYPE html>.*</head>(.*)</body>',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
+         + buttons +'{% endblock %}'
+  return ss
+
+def parisPoser():
+  url = 'https://api.jcdecaux.com/vls/v1/stations?contract=Paris&apiKey=d6177aa449272d6c0bdde000927553cf45ac7c50'
+  response = urllib2.urlopen(url).read()
+  stations = json.loads(response)
+
+  map_paris = folium.Map([48.85329,2.34902], zoom_start=12)
+  # fetching and plotting info on map
+  for station in stations:
+    #create the marker corresponding to the station and it's status
+    status = station['status']
+    name = station['name'].encode('ascii','replace')
+    available_bikes = station['available_bikes']
+    available_bike_stands = station['available_bike_stands']
+    lon = station['position']['lng']
+    lat = station['position']['lat']
+    s = '{0} status: {1}, bikes: {2}, free parking spots: {3}'.format(name,\
+           status, available_bikes, available_bike_stands)
+    s = s.encode('ascii', 'replace')
+    if available_bikes==available_bike_stands:
+      col = 'red'
+    elif float(available_bike_stands)/(available_bike_stands+available_bikes) <=0.15:
+      col= 'orange'
+    else:
+      col = 'green'
+    map_paris.circle_marker([lat, lon], popup=s, radius=50,line_color=col,fill_color=col)
+
+  map_paris.create_map('paris.html')
+  with open('paris.html') as f:
+    s = f.read()
+  buttons = """
+           <div class="nav">
+           <div class="container">
+           <ul>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Prendre</a></li>
+           <li><a href="{{ url_for('ipgp') }}" class="btn btn-large btn-primary">Poser</a></li>
+           </ul>
+           </div>
+           </div>
+           </body>
+           """
+  ss = '{%extends "layout.html"%}\n{%block body%}\n' + \
+        re.search('<!DOCTYPE html>.*</head>(.*)</body>',s,re.DOTALL|re.MULTILINE).group(1) + '\n'\
+         + buttons +'{% endblock %}'
+  return ss
