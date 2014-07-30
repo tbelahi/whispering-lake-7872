@@ -72,6 +72,7 @@ def ipgp():
   #    ss = getStationsIPGP_poser()
   #elif request.method == 'GET':
   #  ss = getStationsIPGP_prendre()
+  ss = getStationsIPGP_prendre()
   return render_template_string(ss)
 
 def getStationsIPGP_prendre():
