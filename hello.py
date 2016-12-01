@@ -79,7 +79,8 @@ def ipgp():
 
 def getStationsIPGP_prendre():
   # clé pour API JCDecaux
-  api_key='d6177aa449272d6c0bdde000927553cf45ac7c50'
+  with open("api.txt") as fp:
+    api_key=json.load(fp)["key"]
 
   carte_ipgp = folium.Map([48.84555,2.35506], zoom_start=16)
   # stations around IPGP:
