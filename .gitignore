@@ -2,3 +2,4 @@ venv
 *.pyc
 *.swp
 api.txt
+pg*.log
